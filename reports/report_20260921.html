@@ -1,0 +1,264 @@
+<!--
+  REPORT TEMPLATE — read before editing
+  ============================================================================
+  LOCKED  — the <style> block and the tag structure around each section.
+            Changing these changes how every future report looks. Only touch
+            if the brief itself changes (new brand, new layout).
+  EDITABLE — everything inside the two for loops below, and the two
+            <p class="meta"> lines. Add/remove items here freely — that's
+            the whole point, this is what changes every run.
+
+  DATA CONTRACT — report.py must pass:
+    report_date   : str   e.g. "2026-09-21"
+    generated_at  : str   e.g. "08:00 UTC+2"
+    api_items     : [{ name, status, description }]     status: "new" | "updated" | "stable"
+    news_items    : [{ headline, source, summary, url }]
+
+  Adding a field to an item dict is safe (old templates ignore unused keys).
+  Removing a field used below will break rendering — grep for it first.
+  ============================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>tracker report — 2026-09-21</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --panel: #12141c;
+    --border: #262a38;
+    --text: #e7e6ef;
+    --text-dim: #8b8fa3;
+    --lime: #b6ff3c;
+    --pink: #ff3ea5;
+    --font: 'Fira Code', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 48px 24px 64px;
+  }
+  header.report-head {
+    margin-bottom: 32px;
+  }
+  .prompt {
+    color: var(--text-dim);
+    font-size: 13px;
+  }
+  .prompt .cmd { color: var(--text); }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 6px 0 0;
+  }
+  section.tracker {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .section-head .cmd {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .tracker.api .cmd { color: var(--lime); }
+  .tracker.news .cmd { color: var(--pink); }
+  p.meta {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin: 0 0 18px;
+  }
+  ul.items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li.item {
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  li.item:first-child { border-top: none; }
+  .item-line {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .item-name { font-weight: 600; }
+  .item-name a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+  .item-name a:hover { border-bottom-color: var(--text-dim); }
+  .status { font-size: 12px; }
+  .status.new { color: var(--lime); }
+  .status.updated { color: var(--pink); }
+  .status.stable { color: var(--text-dim); }
+  .item-desc {
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-top: 3px;
+  }
+  .item-source {
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 12px;
+  }
+  @media (max-width: 480px) {
+    .wrap { padding: 32px 16px 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="report-head">
+    <div class="prompt">eli@mira <span class="cmd">~$ ./tracker report --date=2026-09-21</span></div>
+    <h1>tracker report — 2026-09-21</h1>
+  </header>
+
+  <!-- ===== EDITABLE: content below driven entirely by api_items ===== -->
+  <section class="tracker api">
+    <div class="section-head"><span class="cmd">$ free-api-tracker</span></div>
+    <p class="meta">13 providers tracked</p>
+    <ul class="items">
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Google AI Studio</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: 60 requests per minute | Models: gemini-pro, gemini-pro-vision, gemini-1.5-pro | Tags: google, gemini, multimodal</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">OpenRouter</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Models: openai/gpt-3.5-turbo, google/gemini-pro, meta-llama/llama-3 | Tags: aggregator, openai, meta-llama</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">NVIDIA NIM</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Varies by model | Models: meta/llama-3-8b-instruct, mistralai/mistral-7b-instruct | Tags: nvidia, llama, mistral</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Mistral La Plateforme</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier: 50 RPM | Models: mistral-small, mistral-medium, mistral-large | Tags: mistral, french, open-weight</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Groq</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: 5 requests per minute (free tier) | Models: llama-3.1-8b-instant, llama-3.1-70b-versatile, llama-3.3-70b-versatile | Tags: groq, llama, fast-inference</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Cerebras</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free sandbox available | Models: wafer-2-samples, lama-3.1-70b | Tags: cerebras, wafer-scale, llama</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Together AI</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier: 10 RPM | Models: meta-llama/Llama-3-8b-chat-hf, mistralai/Mistral-7B-Instruct-v0.2 | Tags: together, open-source, fine-tuning</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">DeepSeek</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier available | Models: deepseek-chat, deepseek-coder | Tags: deepseek, chinese, coder</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Alibaba Qwen (DashScope)</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier with quota | Models: qwen-turbo, qwen-plus, qwen-max | Tags: alibaba, qwen, chinese</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Zhipu AI (GLM)</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier: 25 RPM | Models: glm-4, glm-4-plus, glm-4-air | Tags: zhipu, glm, chinese</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">Moonshot AI (Kimi)</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier available | Models: kimi-k2, kimi-k1.5 | Tags: moonshot, kimi, chinese, long-context</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">MiniMax</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier with quota | Models: abab6.5, abab5.5s | Tags: minimax, chinese, abab</div>
+      </li>
+      
+      <li class="item">
+        <div class="item-line">
+          <span class="item-name">01.AI (Yi)</span>
+          <span class="status unverified">[unverified]</span>
+        </div>
+        <div class="item-desc">Rate limit: Free tier: 60 RPM | Models: yi-large, yi-large-turbo, yi-34b | Tags: 01-ai, yi, chinese</div>
+      </li>
+      
+    </ul>
+  </section>
+
+  <section class="tracker news">
+    <div class="section-head"><span class="cmd">$ ai-news-tracker</span></div>
+    <p class="meta">0 stories</p>
+    <ul class="items">
+      
+    </ul>
+  </section>
+  <!-- ===== end editable content ===== -->
+
+  <footer>generated by tracker-core on mira · 03:54 UTC</footer>
+
+</div>
+</body>
+</html>
